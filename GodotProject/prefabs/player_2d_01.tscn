@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://dn2hbi2bii1ec"]
+
+[ext_resource type="Script" path="res://scripts/player_2d_01.gd" id="1_usdm3"]
+[ext_resource type="Texture2D" uid="uid://cbrkvs7dtbksa" path="res://sprites/player_2d.png" id="1_yjm6t"]
+[ext_resource type="Texture2D" uid="uid://dp1t056m6letp" path="res://sprites/player_2d_moved.png" id="3_xbtlj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7en1y"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_sowim"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_yjm6t")]
+}
+
+[sub_resource type="Animation" id="Animation_ffkso"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_yjm6t")]
+}
+
+[sub_resource type="Animation" id="Animation_2g5t1"]
+resource_name = "walk"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_yjm6t"), ExtResource("3_xbtlj")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dspyo"]
+_data = {
+"RESET": SubResource("Animation_sowim"),
+"idle": SubResource("Animation_ffkso"),
+"walk": SubResource("Animation_2g5t1")
+}
+
+[node name="Player2D" type="CharacterBody2D"]
+script = ExtResource("1_usdm3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_yjm6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7en1y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dspyo")
+}
+speed_scale = 2.0

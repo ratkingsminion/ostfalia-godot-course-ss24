@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0p00lv8fxon2"]
+
+[ext_resource type="Material" uid="uid://d3p04j3oc2g21" path="res://materials/material_test_ground.tres" id="1_6rext"]
+[ext_resource type="Material" uid="uid://dbaliirpo741d" path="res://materials/material_test_wall.tres" id="2_2qjg1"]
+[ext_resource type="Script" path="res://scripts/floater.gd" id="3_5w2k8"]
+[ext_resource type="Curve" uid="uid://dn64qxe4n31rr" path="res://smooth_curve.tres" id="4_57lhx"]
+[ext_resource type="ArrayMesh" uid="uid://b1lvuak2nuw0p" path="res://models/torus.obj" id="5_yw623"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6ee16"]
+sky_top_color = Color(0.847059, 0.847059, 0.901961, 1)
+sky_horizon_color = Color(0.721569, 0.617647, 0.658823, 1)
+ground_bottom_color = Color(0.258824, 0.137255, 0.113725, 1)
+ground_horizon_color = Color(0.721569, 0.617647, 0.658823, 1)
+
+[sub_resource type="Sky" id="Sky_c46qe"]
+sky_material = SubResource("ProceduralSkyMaterial_6ee16")
+
+[sub_resource type="Environment" id="Environment_mbrft"]
+background_mode = 2
+sky = SubResource("Sky_c46qe")
+tonemap_mode = 2
+glow_enabled = true
+fog_density = 0.078
+
+[sub_resource type="SphereMesh" id="SphereMesh_bs3n4"]
+radius = 1.0
+height = 2.0
+radial_segments = 32
+
+[sub_resource type="GDScript" id="GDScript_8c1ff"]
+script/source = "extends Node3D
+
+func _process(delta: float) -> void:
+	rotation.y += delta * 2.0
+"
+
+[node name="MyGame" type="Node3D"]
+
+[node name="LEVEL" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LEVEL"]
+environment = SubResource("Environment_mbrft")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LEVEL"]
+transform = Transform3D(0.286859, 0.78087, -0.554936, -5.72125e-10, 0.579281, 0.815128, 0.957973, -0.233827, 0.166172, 0, 5, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LEVEL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299802, 0.107552, -1.05151)
+size = Vector3(9.55993, 1.17529, 13.094)
+material = ExtResource("1_6rext")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="LEVEL/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.314953, 0.308959, -0.438501)
+operation = 2
+radius = 1.96888
+sides = 16
+material = ExtResource("2_2qjg1")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="LEVEL/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37211, 0.308959, 2.03135)
+operation = 2
+radius = 1.96888
+sides = 16
+material = ExtResource("2_2qjg1")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="LEVEL/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83049, 0.308959, -0.209137)
+operation = 2
+radius = 1.96888
+sides = 16
+material = ExtResource("2_2qjg1")
+
+[node name="Camera3D" type="Camera3D" parent="LEVEL"]
+transform = Transform3D(1, 0, 0, 0, 0.834627, 0.550816, 0, -0.550816, 0.834627, 0, 4.11018, 5.71491)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LEVEL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86974, 1.52249, -0.879516)
+light_color = Color(0.619608, 0.156863, 0.392157, 1)
+light_energy = 13.025
+omni_range = 5.205
+omni_attenuation = 0.965936
+
+[node name="MySphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34099, 0.855877, 1.21178)
+material_override = ExtResource("2_2qjg1")
+mesh = SubResource("SphereMesh_bs3n4")
+script = ExtResource("3_5w2k8")
+curve = ExtResource("4_57lhx")
+limit = 3.0
+
+[node name="MySphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.703835, 0, 0, 0, 0.703835, 0, 0, 0, 0.703835, -2.70013, 2.60595, 1.90794)
+material_override = ExtResource("2_2qjg1")
+mesh = SubResource("SphereMesh_bs3n4")
+script = ExtResource("3_5w2k8")
+curve = ExtResource("4_57lhx")
+speed = 1.5
+limit = 1.0
+
+[node name="Torus" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.61364, 0, 0, 0, 1.61364, 0, 0, 0, 1.61364, -1.2937, 0.96406, 2.3499)
+mesh = ExtResource("5_yw623")
+script = SubResource("GDScript_8c1ff")

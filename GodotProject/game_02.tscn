@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm1j2er28ywii"]
+
+[ext_resource type="Script" path="res://scripts/level_01.gd" id="1_op4h5"]
+[ext_resource type="Script" path="res://scripts/camera_01.gd" id="2_40uo0"]
+[ext_resource type="Script" path="res://scripts/player_01.gd" id="2_egq1d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6y1nv"]
+sky_top_color = Color(0.627451, 0.333333, 0.521569, 1)
+sky_horizon_color = Color(0.721569, 0.617647, 0.658823, 1)
+ground_bottom_color = Color(0.258824, 0.137255, 0.113725, 1)
+ground_horizon_color = Color(0.721569, 0.617647, 0.658823, 1)
+
+[sub_resource type="Sky" id="Sky_b4v65"]
+sky_material = SubResource("ProceduralSkyMaterial_6y1nv")
+
+[sub_resource type="Environment" id="Environment_slki4"]
+background_mode = 2
+sky = SubResource("Sky_b4v65")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_fo02r"]
+
+[node name="Game02" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+script = ExtResource("1_op4h5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource("Environment_slki4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(-0.866025, -0.407564, 0.289641, 0, 0.579281, 0.815128, -0.5, 0.705921, -0.501672, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(0.788161, 0.431817, -0.438562, 0, 0.712565, 0.701606, 0.615469, -0.552979, 0.561616, -3.25904, 4.5733, 6.85254)
+script = ExtResource("2_40uo0")
+target = NodePath("../Player")
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49, 0)
+script = ExtResource("2_egq1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.433028, 0, 0, 0, 0.364053, 0, 0, 0, 1.02108, 0, 0, 0)
+mesh = SubResource("BoxMesh_fo02r")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.188601, 0, 0, 0, 0.0637077, -0.638628, 0, 0.0880735, 0.46195, 0, 0.210791, -0.509188)
+mesh = SubResource("BoxMesh_fo02r")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1.73708, 0, 0, 0, 0.180027, 0, 0, 0, 0.500213, 0, 0, -0.107354)
+mesh = SubResource("BoxMesh_fo02r")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.260038, 0, 0, 0, 0.218617, 0, 0, 0, 0.613169, 0, 0, 0.543427)
+mesh = SubResource("BoxMesh_fo02r")

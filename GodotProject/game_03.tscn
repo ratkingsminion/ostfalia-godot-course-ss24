@@ -1,0 +1,299 @@
+[gd_scene load_steps=15 format=3 uid="uid://b4wcdq7ybj6up"]
+
+[ext_resource type="Texture2D" uid="uid://dleatvlwjp4yw" path="res://sprites/crate.png" id="1_gnqwa"]
+[ext_resource type="PackedScene" uid="uid://c2oapmwak2kp4" path="res://prefabs/crate_2d.tscn" id="2_ghmco"]
+[ext_resource type="PackedScene" uid="uid://dn2hbi2bii1ec" path="res://prefabs/player_2d_01.tscn" id="2_pipjw"]
+[ext_resource type="Script" path="res://scripts/platform_2d.gd" id="4_7wj3r"]
+[ext_resource type="Script" path="res://scripts/color_changer_2d.gd" id="5_ehp6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtsac"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbpi6"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_d6hry"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(39, 157)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.0]
+}
+
+[sub_resource type="Animation" id="Animation_lrxes"]
+resource_name = "up_and_down"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(39, 157), Vector2(39, 86.25), Vector2(39, 157)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [4.0, 2.0, 4.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xock1"]
+_data = {
+"RESET": SubResource("Animation_d6hry"),
+"up_and_down": SubResource("Animation_lrxes")
+}
+
+[sub_resource type="Gradient" id="Gradient_l1mfq"]
+offsets = PackedFloat32Array(0, 0.706161, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0.815166, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_klalu"]
+gradient = SubResource("Gradient_l1mfq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.504274)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_53t2a"]
+radius = 57.2189
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jfx7o"]
+gradient = SubResource("Gradient_l1mfq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.504274)
+
+[node name="Game03" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(117, 54)
+
+[node name="Crate" type="Sprite2D" parent="Camera2D"]
+modulate = Color(0.493545, 0.493546, 0.493546, 0.329412)
+scale = Vector2(30, 30)
+texture = ExtResource("1_gnqwa")
+
+[node name="LEVEL" type="Node2D" parent="."]
+
+[node name="Crate2D" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(71, 157)
+
+[node name="Crate2D2" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(103, 157)
+
+[node name="Crate2D3" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(135, 157)
+
+[node name="Crate2D4" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(167, 157)
+
+[node name="Crate2D29" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(228, 131)
+
+[node name="Crate2D5" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(281, 157)
+
+[node name="Crate2D6" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(313, 157)
+
+[node name="Crate2D7" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(345, 157)
+
+[node name="Crate2D8" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(377, 157)
+
+[node name="Crate2D9" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(399, 231)
+
+[node name="Crate2D10" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(431, 231)
+
+[node name="Crate2D11" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(463, 231)
+
+[node name="Crate2D12" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(495, 231)
+
+[node name="Crate2D13" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(459, 127)
+
+[node name="Crate2D14" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(491, 127)
+
+[node name="Crate2D15" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(523, 127)
+
+[node name="Crate2D16" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(555, 127)
+
+[node name="Crate2D17" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(198, 336)
+
+[node name="Crate2D18" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(230, 336)
+
+[node name="Crate2D19" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(262, 336)
+
+[node name="Crate2D20" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(294, 336)
+
+[node name="Crate2D21" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(345, 402)
+
+[node name="Crate2D22" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(377, 402)
+
+[node name="Crate2D23" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(409, 402)
+
+[node name="Crate2D24" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(441, 402)
+
+[node name="Crate2D25" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(-94, 86)
+
+[node name="Crate2D26" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(-62, 86)
+
+[node name="Crate2D27" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(-30, 86)
+
+[node name="Crate2D28" parent="LEVEL" instance=ExtResource("2_ghmco")]
+position = Vector2(2, 86)
+
+[node name="CRATES" type="Node2D" parent="."]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="CRATES"]
+position = Vector2(262, 42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CRATES/RigidBody2D"]
+shape = SubResource("RectangleShape2D_wtsac")
+
+[node name="Crate" type="Sprite2D" parent="CRATES/RigidBody2D"]
+modulate = Color(0.905882, 0.184314, 0.709804, 1)
+texture = ExtResource("1_gnqwa")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="CRATES"]
+position = Vector2(278, 77)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CRATES/RigidBody2D2"]
+shape = SubResource("RectangleShape2D_wtsac")
+
+[node name="Crate" type="Sprite2D" parent="CRATES/RigidBody2D2"]
+modulate = Color(0.905882, 0.184314, 0.709804, 1)
+texture = ExtResource("1_gnqwa")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="CRATES"]
+position = Vector2(330, 82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CRATES/RigidBody2D3"]
+shape = SubResource("RectangleShape2D_wtsac")
+
+[node name="Crate" type="Sprite2D" parent="CRATES/RigidBody2D3"]
+modulate = Color(0.905882, 0.184314, 0.709804, 1)
+texture = ExtResource("1_gnqwa")
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="CRATES"]
+position = Vector2(277, 117)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CRATES/RigidBody2D4"]
+shape = SubResource("RectangleShape2D_wtsac")
+
+[node name="Crate" type="Sprite2D" parent="CRATES/RigidBody2D4"]
+modulate = Color(0.905882, 0.184314, 0.709804, 1)
+texture = ExtResource("1_gnqwa")
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="CRATES"]
+position = Vector2(306, 37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CRATES/RigidBody2D5"]
+shape = SubResource("RectangleShape2D_wtsac")
+
+[node name="Crate" type="Sprite2D" parent="CRATES/RigidBody2D5"]
+modulate = Color(0.905882, 0.184314, 0.709804, 1)
+texture = ExtResource("1_gnqwa")
+
+[node name="RigidBody2D6" type="RigidBody2D" parent="CRATES"]
+position = Vector2(281, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CRATES/RigidBody2D6"]
+shape = SubResource("RectangleShape2D_wtsac")
+
+[node name="Crate" type="Sprite2D" parent="CRATES/RigidBody2D6"]
+modulate = Color(0.905882, 0.184314, 0.709804, 1)
+texture = ExtResource("1_gnqwa")
+
+[node name="Player2D" parent="." instance=ExtResource("2_pipjw")]
+position = Vector2(117, 54)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player2D"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Platform2D" type="AnimatableBody2D" parent="."]
+position = Vector2(39, 157)
+script = ExtResource("4_7wj3r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2D"]
+shape = SubResource("RectangleShape2D_wbpi6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2D"]
+modulate = Color(0.305882, 0.556863, 1, 1)
+texture_filter = 1
+texture = ExtResource("1_gnqwa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xock1")
+}
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-35, 44)
+energy = 3.0
+texture = SubResource("GradientTexture2D_klalu")
+texture_scale = 4.0
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(393, 105)
+script = ExtResource("5_ehp6f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_53t2a")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Area2D"]
+energy = 3.0
+texture = SubResource("GradientTexture2D_jfx7o")
+texture_scale = 3.0
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

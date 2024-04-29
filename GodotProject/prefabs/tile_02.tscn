@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1ab3fy3axa81"]
+
+[ext_resource type="Material" uid="uid://dbaliirpo741d" path="res://materials/material_test_wall.tres" id="1_82v3g"]
+
+[node name="Tile01" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00205004, -0.228562, -0.00375223)
+size = Vector3(3, 0.5, 3)
+material = ExtResource("1_82v3g")
