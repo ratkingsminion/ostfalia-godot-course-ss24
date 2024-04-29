@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GDKurs_2024_BD"
+config/name="GDCourse SS2024 Ostfalia"
 run/main_scene="res://game_03.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
