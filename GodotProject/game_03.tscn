@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4wcdq7ybj6up"]
+[gd_scene load_steps=19 format=3 uid="uid://b4wcdq7ybj6up"]
 
+[ext_resource type="Script" path="res://scripts/game_03.gd" id="1_5xdry"]
 [ext_resource type="Texture2D" uid="uid://dleatvlwjp4yw" path="res://sprites/crate.png" id="1_gnqwa"]
 [ext_resource type="PackedScene" uid="uid://c2oapmwak2kp4" path="res://prefabs/crate_2d.tscn" id="2_ghmco"]
 [ext_resource type="PackedScene" uid="uid://dn2hbi2bii1ec" path="res://prefabs/player_2d_01.tscn" id="2_pipjw"]
 [ext_resource type="Script" path="res://scripts/platform_2d.gd" id="4_7wj3r"]
 [ext_resource type="Script" path="res://scripts/color_changer_2d.gd" id="5_ehp6f"]
+[ext_resource type="Script" path="res://scripts/item.gd" id="6_eg2aa"]
+[ext_resource type="Texture2D" uid="uid://1u60pt8wy3n2" path="res://icon.svg" id="7_jo17w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wtsac"]
 size = Vector2(32, 32)
@@ -92,7 +95,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.504274)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ahiu"]
+radius = 5.0
+
 [node name="Game03" type="Node2D"]
+script = ExtResource("1_5xdry")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(117, 54)
@@ -253,8 +260,9 @@ shape = SubResource("RectangleShape2D_wtsac")
 modulate = Color(0.905882, 0.184314, 0.709804, 1)
 texture = ExtResource("1_gnqwa")
 
-[node name="Player2D" parent="." instance=ExtResource("2_pipjw")]
+[node name="Player2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_pipjw")]
 position = Vector2(117, 54)
+target = NodePath("../Area2D")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player2D"]
 remote_path = NodePath("../../Camera2D")
@@ -295,5 +303,44 @@ energy = 3.0
 texture = SubResource("GradientTexture2D_jfx7o")
 texture_scale = 3.0
 
+[node name="ITEM" type="Area2D" parent="."]
+position = Vector2(70, 125)
+script = ExtResource("6_eg2aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ITEM"]
+shape = SubResource("CircleShape2D_3ahiu")
+
+[node name="Icon" type="Sprite2D" parent="ITEM"]
+position = Vector2(1, 1)
+scale = Vector2(0.118021, 0.10928)
+texture = ExtResource("7_jo17w")
+
+[node name="ITEM2" type="Area2D" parent="."]
+position = Vector2(151, 125)
+script = ExtResource("6_eg2aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ITEM2"]
+shape = SubResource("CircleShape2D_3ahiu")
+
+[node name="Icon" type="Sprite2D" parent="ITEM2"]
+position = Vector2(1, 1)
+scale = Vector2(0.118021, 0.10928)
+texture = ExtResource("7_jo17w")
+
+[node name="ITEM3" type="Area2D" parent="."]
+position = Vector2(-16, 47)
+script = ExtResource("6_eg2aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ITEM3"]
+shape = SubResource("CircleShape2D_3ahiu")
+
+[node name="Icon" type="Sprite2D" parent="ITEM3"]
+position = Vector2(1, 1)
+scale = Vector2(0.118021, 0.10928)
+texture = ExtResource("7_jo17w")
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="body_entered" from="ITEM" to="ITEM" method="_on_body_entered"]
+[connection signal="body_entered" from="ITEM2" to="ITEM2" method="_on_body_entered"]
+[connection signal="body_entered" from="ITEM3" to="ITEM3" method="_on_body_entered"]

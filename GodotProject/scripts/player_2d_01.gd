@@ -9,12 +9,17 @@ extends CharacterBody2D
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 
+@export var target: Node2D
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
+func _ready() -> void:
+	# Hängen wir uns an das Signal dran, das Game aufruft, sobald der Highscore erhöht wurde
+	Game.instance.highscore_increased.connect(_on_highscore_increased)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -54,3 +59,11 @@ func _physics_process(delta: float) -> void:
 	# Scripts auch berücksichtigt wird - die Figur wird verschoben und kollidiert mit
 	# anderen physikalischen Objekten in der Szene.
 	move_and_slide()
+
+# Werde größer, wenn der Highscore 2 ist, oder teleportiere an eine andere Stelle,
+# wenn der Highscore 3 ist
+func _on_highscore_increased(highscore: int) -> void:
+	if highscore == 2:
+		scale *= 2
+	elif highscore == 3:
+		position = target.position
